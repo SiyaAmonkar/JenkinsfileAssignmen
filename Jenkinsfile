@@ -30,27 +30,32 @@ pipeline {
             
         }
     }
-     stages {
-        stage('Build and Publish the image') {
-            steps {
-                script{
-			 dockerImage = docker.build("shivani221/dockerisedtomcat")
-			 docker.withRegistry( '', registryCredential ) {
-                         dockerImage.push("$BUILD_NUMBER")
-                         dockerImage.push('latest')
+
+        stage('Dockerized Tomcat') {
+		stages{
+			stage('Build and Publish the image'){
+				steps {
+                		script{
+			 	dockerImage = docker.build("shivani221/dockerisedtomcat")
+			 	docker.withRegistry( '', registryCredential ) {
+                        	 dockerImage.push("$BUILD_NUMBER")
+                         	dockerImage.push('latest')
 			 }
 			}
+                      }
+		}
+			//Running the container
+			stage('Run the Conatiner') {
+            		steps {
+              			  sh 'docker run -d --name mytomcat -p 9090:8080 shivani221/tomcatcontainer:latest'
                 
+           			}
+			
+				}
+			
            }
-
-         }
+	
          
-         stage('Run the Conatiner') {
-            steps {
-                sh 'docker run -d --name mytomcat -p 9090:8080 shrivani221/tomcatcontainer:latest'
-                
-           }
-
          }
     }
 }
