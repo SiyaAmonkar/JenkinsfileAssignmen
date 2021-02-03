@@ -19,7 +19,11 @@ pipeline {
             steps {
                 // Get code from a GitHub repository
                 git ' https://github.com/SiyaAmonkar/JenkinsfileAssignment.git'
-
+		 sh script:'''
+		    	touch musicstore/src/main/webapp/version.html
+		      '''
+		     println uuid
+		     writeFile file: "musicstore/src/main/webapp/version.html", text: uuid
                 // Run Maven on a Unix agent.
                sh '''cd musicstore
                 mvn clean package'''
