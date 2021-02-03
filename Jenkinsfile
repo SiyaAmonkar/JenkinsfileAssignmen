@@ -33,7 +33,7 @@ pipeline {
 			stage('Build and Publish the image'){
 				steps {
                 		script{
-			 	dockerImage = docker.build("shivani221/dockerisedtomcat")
+			 	dockerImage = docker.build("shivani221/tomcatcontainer")
 			 	docker.withRegistry( '', registryCredential ) {
                         	 dockerImage.push("$BUILD_NUMBER")
                          	dockerImage.push('latest')
