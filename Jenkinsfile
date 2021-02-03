@@ -26,7 +26,7 @@ pipeline {
 
                
             }
-}
+	}
 
         stage('Dockerized Tomcat') {
 		
@@ -41,10 +41,38 @@ pipeline {
 			}
                       }
 		}
+	    stage('Docker-compose up and run the test')
+	    {
+		    steps{
+			  sh script:'''
+			  docker-compose up -d --scale chrome=3
+			  cd SeleniumTest
+			  mvn -Dtest="SearchTest.java" test
+		          '''
+			}
+	    }  
+	     stage('Deploy on tomcat in VM and Monitor http status and version'){   
+            steps{
+            deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'musicstore', onFailure: false, war: 'musicstore/target/*.war'
+            sh 'curl -I \'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/musicstore/index.html\' | grep HTTP'
+		script{
+                def response = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:8081/musicstore/version.html', returnStdout: true)
+		 if(env.uuid == response)
+		      echo 'Latest version deployed'
+		 else
+		      echo 'Older version deployed'
+	         }
+	    }
+        }
 			
 			
 			
-           }
+     }
+	post{
+                    always{
+                         sh "docker rm -f tomcatcontainer"
+                         }
+            }
 	
          
          }
