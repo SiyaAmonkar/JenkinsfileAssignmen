@@ -42,9 +42,9 @@ pipeline {
                       }
 		}
 			//Running the container
-			stage('Run the Conatiner') {
+			stage('Run the Container') {
             		steps {
-              			  sh 'docker run -d --name mytomcat -p 9090:8080 shivani221/tomcatcontainer:latest'
+              			  sh 'docker run -d --name tomcatcontainer -p 9090:8080 shivani221/tomcatcontainer:latest'
                 
            			}
 			
