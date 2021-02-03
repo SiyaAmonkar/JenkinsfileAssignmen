@@ -26,10 +26,7 @@ pipeline {
 
                
             }
-
-            
-        }
-    }
+}
 
         stage('Dockerized Tomcat') {
 		stages{
