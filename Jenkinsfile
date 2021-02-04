@@ -64,7 +64,7 @@ pipeline {
 			  mvn -Dtest="UUIDTest.java" test -Duuid="$version" 
 		          '''
 			  
-			   mvn -Dtest="SearchTest.java" test
+			   //mvn -Dtest="SearchTest.java" test
 			}
 	    }  
 	   
