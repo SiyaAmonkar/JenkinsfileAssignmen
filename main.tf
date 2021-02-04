@@ -10,13 +10,13 @@ provider "docker" {
 
   registry_auth {
     address = "registry.hub.docker.com"
-    username = "shivani221"
+    username = "siya98"
     password = var.password
   }
 }
 
 resource "docker_image" "customtomcatimage" {
-  name = "shivani221/customtomcatimage:latest"
+  name = "siya98/customtomcatimage:latest"
   build {
       path="."
   }
