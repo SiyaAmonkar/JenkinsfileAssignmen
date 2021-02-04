@@ -12,8 +12,8 @@ terraform{
 # Configure the docker provider
 provider "docker" {
 }
-resource "docker_image" "customtomcat" {
-  name = "customtomcat:latest"
+resource "docker_image" "shivani221/customtomcat:latest" {
+  name = "shivani221/customtomcat:latest"
   build {
             path = "."
      }
@@ -21,7 +21,7 @@ resource "docker_image" "customtomcat" {
 
 
 resource "docker_container" "terratomcat" {
-  image = "customtomcat:latest"
+  image = "shivani221/customtomcat:latest"
   name  = "terratomcat"
   restart = "always"
   ports {
