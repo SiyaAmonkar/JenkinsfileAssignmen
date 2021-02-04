@@ -21,7 +21,7 @@ resource "docker_image" "customtomcat" {
 
 
 resource "docker_container" "terratomcat" {
-  image = "shivani221/customtomcat:latest"
+  image = "customtomcat"
   name  = "terratomcat"
   restart = "always"
   ports {
