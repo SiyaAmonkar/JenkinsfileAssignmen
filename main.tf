@@ -27,6 +27,6 @@ resource "docker_container" "terratomcat" {
   restart = "always"
   ports {
     internal = 8080
-    external = 9090
+    external = 9094
   }
 }
