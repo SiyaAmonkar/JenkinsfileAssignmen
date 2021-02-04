@@ -46,7 +46,7 @@ pipeline {
 			}
                       }
 		}*/
-	     stage(Terraform-Docker image and container creation)
+	     stage('Terraform-Docker image and container creation')
 	    {
 		    steps{
 			    sh 'terraform init'
@@ -72,7 +72,7 @@ pipeline {
             sh 'curl -I \'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/musicstore/index.html\' | grep HTTP'
 		script{
                 def response = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:8081/musicstore/version.html', returnStdout: true)
-		 if(env.uuid == response)
+		 if(env.version == response)
 		      echo 'Latest version deployed'
 		 else
 		      echo 'Older version deployed'
