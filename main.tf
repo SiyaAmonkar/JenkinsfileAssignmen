@@ -12,7 +12,7 @@ terraform{
 # Configure the docker provider
 provider "docker" {
 }
-resource "docker_image" "shivani221/customtomcat:latest" {
+resource "docker_image" "customtomcat:latest" {
   name = "shivani221/customtomcat:latest"
   build {
             path = "."
