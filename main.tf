@@ -1,31 +1,38 @@
-terraform{
-    required_providers {
-    # We recommend pinning to the specific version of the Docker Provider you're using
-    # since new versions are released frequently
+terraform {
+  required_providers {
     docker = {
-      source  = "kreuzwerker/docker"
-      version = "2.8.0"
+      source = "kreuzwerker/docker"
+      version = "2.11.0"
     }
   }
- }
-
-# Configure the docker provider
+}
 provider "docker" {
+
+  registry_auth {
+    address = "registry.hub.docker.com"
+    username = "shivani221"
+    password = var.password
+  }
 }
-resource "docker_image" "customtomcat" {
-  name = "shivani221/customtomcat:latest"
+
+resource "docker_image" "customTomcatimage" {
+  name = "shivani221/customTomcatimage:latest"
   build {
-            path = "."
-     }
+      path="."
+  }
+  force_remove = true
 }
 
-
-resource "docker_container" "terratomcat" {
-  image = "customtomcat"
-  name  = "terratomcat"
-  restart = "always"
+resource "docker_container" "terratomcatcontainer" {
+  name  = "terratomcatcontainer"
+  image = docker_image.customTomcatimage.latest
+  must_run = true
   ports {
     internal = 8080
     external = 9094
   }
+}
+
+variable "password" {
+  type = string
 }
