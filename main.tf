@@ -14,8 +14,7 @@ provider "docker" {
 }
 resource "docker_image" "customtomcat" {
   name = "customtomcat:latest"
-  build =
-        {
+  build {
             path = "."
      }
 }
