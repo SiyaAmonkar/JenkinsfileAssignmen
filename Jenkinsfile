@@ -12,7 +12,7 @@ pipeline {
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "maven"
-	terraform "terraform"
+	//terraform "terraform"
     }
 
     stages {
@@ -23,8 +23,8 @@ pipeline {
 		 sh script:'''
 		    	touch musicstore/src/main/webapp/version.html
 		      '''
-		     println uuid
-		     writeFile file: "musicstore/src/main/webapp/version.html", text: uuid
+		     println version
+		     writeFile file: "musicstore/src/main/webapp/version.html", text: version
                 // Run Maven on a Unix agent.
                sh '''cd musicstore
                 mvn clean package'''
