@@ -2,7 +2,7 @@
 pipeline {
     agent any
     environment {
-        uuid = UUID.randomUUID().toString()
+        UUID version = UUID.randomUUID()
         registryCredential ='docker'
 	    containerName = "shraddhal/seleniumtest2"
         container_version = "1.0.0.${BUILD_ID}"
@@ -12,6 +12,7 @@ pipeline {
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "maven"
+	terraform "terraform"
     }
 
     stages {
@@ -32,7 +33,7 @@ pipeline {
             }
 	}
 
-        stage('Dockerized Tomcat') {
+        /*stage('Dockerized Tomcat') {
 		
 		steps {
                 	script{
@@ -44,7 +45,15 @@ pipeline {
 			 }
 			}
                       }
-		}
+		}*/
+	     stage(Terraform-Docker image and container creation)
+	    {
+		    steps{
+			    sh 'terraform init'
+			    sh 'terraform plan'
+			    sh 'terraform apply --auto-approve'
+		    }
+	    }
 	    stage('Docker-compose up and run the test')
 	    {
 		    steps{
@@ -55,6 +64,8 @@ pipeline {
 		          '''
 			}
 	    }  
+	   
+	    
 	     stage('Deploy on tomcat in VM and Monitor http status and version'){   
             steps{
             deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'musicstore', onFailure: false, war: 'musicstore/target/*.war'
@@ -74,7 +85,7 @@ pipeline {
      }
 	post{
                     always{
-                         sh "docker rm -f tomcatcontainer"
+                         sh 'terraform destroy --auto-approve'
                          }
             }
 	
