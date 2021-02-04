@@ -61,8 +61,10 @@ pipeline {
 			  sh script:'''
 			  docker-compose up -d --scale chrome=3
 			  cd SeleniumTest
-			  mvn -Dtest="SearchTest.java" test
+			  mvn -Dtest="UUIDTest.java" test -Duuid="$version" 
 		          '''
+			  
+			   mvn -Dtest="SearchTest.java" test
 			}
 	    }  
 	   
@@ -87,6 +89,7 @@ pipeline {
 	post{
                     always{
                          sh 'terraform destroy --auto-approve'
+			 sh 'docker-compose down'
                          }
             }
 	
