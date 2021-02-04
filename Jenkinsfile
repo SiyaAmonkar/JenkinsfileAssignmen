@@ -49,9 +49,10 @@ pipeline {
 	     stage('Terraform-Docker image and container creation')
 	    {
 		    steps{
-			    sh 'terraform init'
-			    sh 'terraform plan'
-			    sh 'terraform apply --auto-approve'
+		 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
+                    sh 'terraform init'
+                    sh 'terraform apply -auto-approve -var "password=$dockerpass"'
+                }
 		    }
 	    }
 	    stage('Docker-compose up and run the test')
