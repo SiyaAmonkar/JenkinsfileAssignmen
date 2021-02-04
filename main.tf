@@ -12,10 +12,17 @@ terraform{
 # Configure the docker provider
 provider "docker" {
 }
+resource "docker_image" "customtomcat" {
+  name = "customtomcat:latest"
+  build =
+        {
+            path = "."
+     }
+}
 
 
 resource "docker_container" "terratomcat" {
-  image = "shivani221/dockerisedtomcat:latest"
+  image = "customtomcat:latest"
   name  = "terratomcat"
   restart = "always"
   ports {
