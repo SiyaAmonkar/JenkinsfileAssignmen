@@ -15,8 +15,8 @@ provider "docker" {
   }
 }
 
-resource "docker_image" "customTomcatimage" {
-  name = "shivani221/customTomcatimage:latest"
+resource "docker_image" "customtomcatimage" {
+  name = "shivani221/customtomcatimage:latest"
   build {
       path="."
   }
@@ -24,7 +24,7 @@ resource "docker_image" "customTomcatimage" {
 
 resource "docker_container" "terratomcatcontainer" {
   name  = "terratomcatcontainer"
-  image = docker_image.customTomcatimage.latest
+  image = docker_image.customtomcatimage.latest
   must_run = true
   ports {
     internal = 8080
