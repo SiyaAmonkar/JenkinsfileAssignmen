@@ -49,9 +49,9 @@ pipeline {
 	     stage('Terraform-Docker image and container creation')
 	    {
 		    steps{
-		 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
+		 withCredentials([usernamePassword(credentialsId: 'siya_docker', passwordVariable: 'siya_dockerpass', usernameVariable: 'siya_dockeruser')]) {
                     sh 'terraform init'
-                    sh 'terraform apply -auto-approve -var "password=$dockerpass"'
+                    sh 'terraform apply -auto-approve -var "password=$siya_dockerpass"'
                 }
 		    }
 	    }
