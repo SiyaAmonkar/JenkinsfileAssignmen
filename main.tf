@@ -20,7 +20,6 @@ resource "docker_image" "customTomcatimage" {
   build {
       path="."
   }
-  force_remove = true
 }
 
 resource "docker_container" "terratomcatcontainer" {
