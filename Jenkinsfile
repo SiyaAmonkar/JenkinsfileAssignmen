@@ -3,10 +3,7 @@ pipeline {
     agent any
     environment {
         UUID version = UUID.randomUUID()
-        registryCredential ='docker'
-	    containerName = "siya98/seleniumtest2"
-        container_version = "1.0.0.${BUILD_ID}"
-        dockerTag = "${containerName}:${container_version}"
+       
     }
 
     tools {
