@@ -48,7 +48,7 @@ pipeline {
 		    steps{
 		 withCredentials([usernamePassword(credentialsId: 'siya_docker', passwordVariable: 'siya_dockerpass', usernameVariable: 'siya_dockeruser')]) {
                     sh 'terraform init'
-                    sh 'terraform apply -auto-approve -var "password=$siya_dockerpass"'
+                    sh 'terraform apply -target=module.tomcat_container -var "pass=$dockerpass" -auto-approve'
                 }
 		    }
 	    }
@@ -56,11 +56,11 @@ pipeline {
 	    {
 		    steps{
 			  sh script:'''
-			  docker-compose up -d --scale chrome=3
+			 terraform apply -auto-approve -target=module.testing_containers -var pass=""
 			  cd SeleniumTest
 			  mvn -Dtest="UUIDTest.java" test -Duuid="$version" 
 		          '''
-			  
+			   //docker-compose up -d --scale chrome=3
 			   //mvn -Dtest="SearchTest.java" test
 			}
 	    }  
@@ -86,7 +86,7 @@ pipeline {
 	post{
                     always{
                          sh 'terraform destroy --auto-approve'
-			 sh 'docker-compose down'
+			// sh 'docker-compose down'
                          }
             }
 	
