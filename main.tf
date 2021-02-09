@@ -11,6 +11,8 @@
 }*/
    module "aws_tomcat" {
   source = "./aws_tomcat"
+  access=var.acc
+  secret=var.sec
      }
   
 
