@@ -86,7 +86,7 @@ pipeline {
     				 sh 'cp musicstore/target/MusicStore.war aws_tomcat/MusicStore.war'
 				 sh 'cd aws_tomcat'
 		    		sh 'terraform init'
-		   		 sh 'terraform apply -target=module.deploy_aws -var "access=$access_key" -var "secret=$secret_access_key" -auto-approve '
+		   		 sh 'terraform apply -var "access=$access_key" -var "secret=$secret_access_key" -auto-approve '
 				}
 		
                 	}
