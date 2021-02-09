@@ -82,10 +82,10 @@ pipeline {
 	     stage('Terraform-aws-tomcat')
 	    {
 		    steps{
-			    withCredentials([string(credentialsId: 'access_key', variable: 'access_key'), string(credentialsId: 'sec_access_key', variable: 'sec_access_key')]) {
+			    withCredentials([string(credentialsId: 'access_key', variable: 'access_key'), string(credentialsId: 'sec_key', variable: 'secret_access_key')])  {
     				 sh 'cp musicstore/target/MusicStore.war aws_tomcat/MusicStore.war'
 		    		sh 'terraform init'
-		   		 sh 'terraform apply -target=module.deploy_aws -var "acc=$access_key" -var "sec=$sec_access_key" -auto-approve '
+		   		 sh 'terraform apply -target=module.deploy_aws -var "acc=$access_key" -var "sec=$secret_access_key" -auto-approve '
 				}
 		
                 	}
