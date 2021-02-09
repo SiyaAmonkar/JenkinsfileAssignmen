@@ -10,6 +10,7 @@ resource "aws_instance" "Tomcat-Server" {
     tags = {
         Name = "Tomcat-Server"
     }
+  }
     
 
 variable "access" {
