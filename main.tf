@@ -11,6 +11,7 @@
 }*/
    module "aws_tomcat" {
   source = "./aws_tomcat"
+     }
   
 
 variable "acc" {
