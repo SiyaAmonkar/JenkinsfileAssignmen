@@ -10,6 +10,12 @@ resource "aws_instance" "Tomcat-Server" {
     tags = {
         Name = "Tomcat-Server"
     }
+    user_data = <<-EOF
+  #!/bin/bash
+  sudo amazon-linux-extras install tomcat8.5 
+  sudo systemctl enable tomcat
+  sudo systemctl start tomcat
+  EOF
   }
     
 
