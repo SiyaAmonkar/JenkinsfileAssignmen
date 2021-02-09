@@ -28,9 +28,6 @@ resource "aws_instance" "Tomcat-Server" {
       }
     }
 }
-/*output "aws_link" {
-  value=format("Access the AWS hosted app from here: http://%s%s", aws_instance.Tomcat-Server.public_dns, ":8080/MusicStore")
-}*/
 data "template_file" "asg_init" {
   template = file("${path.module}/userdata.tpl")
 }
