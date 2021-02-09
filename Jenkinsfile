@@ -42,7 +42,7 @@ pipeline {
 			 }
 			}
                       }
-		}*/
+		}
 	     stage('Terraform-Docker image and container creation')
 	    {
 		    steps{
@@ -52,6 +52,7 @@ pipeline {
                 }
 		    }
 	    }
+	   
 	    stage('Docker-compose up and run the test')
 	    {
 		    steps{
@@ -77,13 +78,28 @@ pipeline {
 		 else
 		      echo 'Older version deployed'
 	         }
+	    }*/
+	     stage('Terraform-aws-tomcat')
+	    {
+		    steps{
+			    withCredentials([string(credentialsId: 'access_key', variable: 'access_key'), string(credentialsId: 'sec_access_key', variable: 'sec_access_key')]) {
+    				 sh 'cp musicstore/target/MusicStore.war awstomcat/MusicStore.war'
+		    		sh 'terraform init'
+		   		 sh 'terraform apply -target=module.awstomcat -var "acc=$access_key" -var "sec=$sec_access_key" -auto-approve '
+				}
+		
+                	}
+		    }
 	    }
+	   
+	    
+	    
         }
 			
 			
 			
      }
-	post{
+	/*post{
                     always{
                          sh 'terraform destroy --auto-approve'
 			// sh 'docker-compose down'
@@ -91,5 +107,5 @@ pipeline {
             }
 	
          
-         }
+         }*/
 	    
