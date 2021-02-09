@@ -84,7 +84,7 @@ pipeline {
 		    steps{
 			    withCredentials([string(credentialsId: 'access_key', variable: 'access_key'), string(credentialsId: 'sec_key', variable: 'secret_access_key')])  {
     				 sh 'cp musicstore/target/MusicStore.war aws_tomcat/MusicStore.war'
-				 sh 'cd awstomcat'
+				 sh 'cd aws_tomcat'
 		    		sh 'terraform init'
 		   		 sh 'terraform apply -target=module.deploy_aws -var "access=$access_key" -var "secret=$secret_access_key" -auto-approve '
 				}
