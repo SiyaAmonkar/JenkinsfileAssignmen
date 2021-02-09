@@ -9,9 +9,9 @@
    module "aws_tomcat {
   source = "./aws_tomcat"
   
-variable "pass" {
+/*variable "pass" {
   type = string
-}
+}*/
 variable "acc" {
   type = string
   default = "access-key"
