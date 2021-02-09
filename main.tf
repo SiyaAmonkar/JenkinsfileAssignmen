@@ -6,12 +6,13 @@
 /* module "testing_containers" {
   source = "./SeleniumTest"
 }*/
+ /* variable "pass" {
+  type = string
+}*/
    module "aws_tomcat {
   source = "./aws_tomcat"
   
-/* variable "pass" {
-  type = string
-}*/
+
 variable "acc" {
   type = string
   default = "access-key"
