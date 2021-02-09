@@ -12,3 +12,11 @@
 variable "pass" {
   type = string
 }
+variable "acc" {
+  type = string
+  
+}
+variable "sec" {
+  type = string
+ 
+}
