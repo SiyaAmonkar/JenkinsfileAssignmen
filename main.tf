@@ -9,7 +9,7 @@
  /* variable "pass" {
   type = string
 }*/
-   module "aws_tomcat {
+   module "aws_tomcat" {
   source = "./aws_tomcat"
   
 
