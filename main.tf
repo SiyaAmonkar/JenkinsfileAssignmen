@@ -9,7 +9,7 @@
  /* variable "pass" {
   type = string
 }*/
-   module "aws_tomcat" {
+   module "deploy_aws" {
   source = "./aws_tomcat"
   access=var.acc
   secret=var.sec
