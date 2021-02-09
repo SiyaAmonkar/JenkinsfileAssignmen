@@ -1,8 +1,8 @@
 
 provider "aws" {
   region="ap-south-1"
-  access_key = var.access
-  secret_key = var.secret
+  access_key = var.acc
+  secret_key = var.sec
 }
 resource "aws_instance" "Tomcat-Server" {
     ami = "ami-08e0ca9924195beba"
@@ -13,9 +13,9 @@ resource "aws_instance" "Tomcat-Server" {
   }
     
 
-variable "access" {
+variable "acc" {
   type = string
 }
-variable "secret" {
+variable "sec" {
   type = string
 }
