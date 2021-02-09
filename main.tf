@@ -14,9 +14,11 @@ variable "pass" {
 }
 variable "acc" {
   type = string
+  default = "access-key"
   
 }
 variable "sec" {
   type = string
+  default = "secret-key"
  
 }
