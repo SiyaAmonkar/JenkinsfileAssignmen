@@ -46,10 +46,10 @@ pipeline {
 			  sh script:'''
 			 terraform apply -auto-approve -target=module.testing_containers -var pass=""
 			  cd SeleniumTest
-			  mvn -Dtest="UUIDTest.java" test -Duuid="$version" 
+			  mvn -Dtest="SearchTest.java" test 
 		          '''
 			   //docker-compose up -d --scale chrome=3
-			   //mvn -Dtest="SearchTest.java" test
+			   // mvn -Dtest="UUIDTest.java" test -Duuid="$version"
 			}
 	    }  
 	   
