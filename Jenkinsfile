@@ -30,19 +30,6 @@ pipeline {
             }
 	}
 
-        stage('Dockerized Tomcat') {
-		
-		steps {
-                	script{
-			 	dockerImage = docker.build("shivani221/tomcatcontainer")
-			 	docker.withRegistry( '', registryCredential ) {
-                        	 dockerImage.push("$BUILD_NUMBER")
-                         	dockerImage.push('latest')
-				sh 'docker run -d --name tomcatcontainer -p 9090:8080 shivani221/tomcatcontainer:latest'
-			 }
-			}
-                      }
-		}
 	     stage('Terraform-Docker image and container creation')
 	    {
 		    steps{
