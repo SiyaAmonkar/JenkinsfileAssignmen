@@ -79,6 +79,7 @@ pipeline {
 		      echo 'Older version deployed'
 	         }
 	    }
+	     }
 	     stage('Terraform-aws-tomcat')
 	    {
 		    steps{
