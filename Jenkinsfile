@@ -30,7 +30,7 @@ pipeline {
             }
 	}
 
-        /*stage('Dockerized Tomcat') {
+        stage('Dockerized Tomcat') {
 		
 		steps {
                 	script{
@@ -78,7 +78,7 @@ pipeline {
 		 else
 		      echo 'Older version deployed'
 	         }
-	    }*/
+	    }
 	     stage('Terraform-aws-tomcat')
 	    {
 		    steps{
@@ -102,7 +102,7 @@ pipeline {
 			
 			
      
-	/*post{
+	post{
                     always{
                          sh 'terraform destroy --auto-approve'
 			// sh 'docker-compose down'
@@ -110,5 +110,5 @@ pipeline {
             }
 	
          
-         }*/
+         }
 	    
